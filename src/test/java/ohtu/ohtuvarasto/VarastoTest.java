@@ -64,5 +64,63 @@ public class VarastoTest {
         // varastossa pitäisi olla tilaa 10 - 8 + 2 eli 4
         assertEquals(4, varasto.paljonkoMahtuu(), vertailuTarkkuus);
     }
+    
+    @Test
+    public void kahdenParametrinKonstruktorinSaldoToimii() {
+        varasto = new Varasto(10, 5);
+        assertEquals(5, varasto.getSaldo(), 0.0);
+        
+    }
 
+    @Test
+    public void kahdenParametrinKonstruktorinSaldoEiNegatiivinen() {
+        varasto = new Varasto(10, -5);
+        assertEquals(0, varasto.getSaldo(), 0.0);
+        
+    }
+    @Test
+    public void kahdenParametrinKonstruktorinSaldoEiTilavuuttaIsompi() {
+        varasto = new Varasto(10, 15);
+        assertEquals(10, varasto.getSaldo(), 0.0);
+        
+    }
+    
+    @Test
+    public void eiVoiLisataVarastoonLiikaa() {
+        varasto.lisaaVarastoon(100.0);
+        assertEquals(10.0, varasto.getSaldo(), 0.0);
+    }
+    @Test
+    public void eiVoiLisataVarastoonNegatiivista() {
+        varasto.lisaaVarastoon(-100.0);
+        assertEquals(0.0, varasto.getSaldo(), 0.0);
+    }
+    @Test
+    public void eiVoiOttaaVarastostaLiikaa() {
+        double palautus = varasto.otaVarastosta(100.0);
+        assertEquals(0.0, palautus, 0.0);
+        assertEquals(0.0, varasto.getSaldo(), 0.0);
+    }    @Test
+    public void eiVoiOttaaVarastostaNegatiivista() {
+        double palautus = varasto.otaVarastosta(-100.0);
+        assertEquals(0.0, palautus, 0.0);
+        assertEquals(0.0, varasto.getSaldo(), 0.0);
+    }
+    @Test
+    public void konstruktoriTilavuusVahintaanNolla() {
+        varasto = new Varasto(-0.1);
+        assertEquals(0.0, varasto.getTilavuus(), 0.0);
+    }
+    
+    @Test
+    public void toStringToimiiOikein() {
+        assertTrue(varasto.toString().equals("saldo = " + varasto.getSaldo() + 
+                ", vielä tilaa " + varasto.paljonkoMahtuu()));
+    }
+    @Test
+    public void kahdenParametrinKonstruktorinTilavuusVahintaanNolla() {
+        varasto = new Varasto(-1, 0);
+        assertTrue(varasto.getTilavuus() == 0.0);
+    }
+    
 }
