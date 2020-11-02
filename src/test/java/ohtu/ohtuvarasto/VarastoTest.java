@@ -120,7 +120,7 @@ public class VarastoTest {
     @Test
     public void kahdenParametrinKonstruktorinTilavuusVahintaanNolla() {
         varasto = new Varasto(-1, 0);
-        assertTrue(varasto.getTilavuus() == 0.0);
+        assertTrue(varasto.getTilavuus() == 1.0);
     }
     
 }
