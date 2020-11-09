@@ -7,17 +7,28 @@ public class Varasto {
     private double saldo;     // paljonko varastossa on nyt, >= 0
 
     // --- konstruktorit: ---
-    public Varasto(double tilavuus) {  // tilavuus on annettava
+    public Varasto(double tilavuus)
+    {  // tilavuus on annettava
         if (tilavuus > 0.0) {
             this.tilavuus = tilavuus;
         } else // virheellinen, nollataan
         {
             this.tilavuus = 0.0;  // => käyttökelvoton varasto
         }
+        if (tilavuus > 5.0) {
+        tilavuus = 5.1;
+        } else if (tilavuus < 5.0 && tilavuus > 4.0) {
+        tilavuus = 5;
+        }
+        else if (tilavuus < 4.0 && tilavuus > 3.0) {
+            tilavuus = 4;
+        } else if (tilavuus < 3.0) {
+            tilavuus = 3;
+        }
         saldo = 0;     // oletus: varasto on tyhjä
     }
 
-    public Varasto(double tilavuus, double alkuSaldo) { // kuormitetaan
+public Varasto(double tilavuus, double alkuSaldo) { // kuormitetaan
         if (tilavuus > 0.0) {
             this.tilavuus = tilavuus;
         } else // virheellinen, nollataan
@@ -64,7 +75,9 @@ public class Varasto {
     public double otaVarastosta(double maara) {
         if (maara < 0) // virhetilanteessa voidaan tehdä 
         {
-            return 0.0;   // tällainen pikapoistuminenkin!
+            if (maara < 0) {
+            return 0.0;
+            }   // tällainen pikapoistuminenkin!
         }
         if (maara > saldo) {          // annetaan mitä voidaan
             double kaikkiMitaVoidaan = saldo;
@@ -73,6 +86,29 @@ public class Varasto {
         }
         // jos tänne päästään, kaikki pyydetty voidaan antaa
         saldo = saldo - maara;  // vähennetään annettava saldosta
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
         return maara;
     }
 
